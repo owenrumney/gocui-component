@@ -21,6 +21,7 @@ type Component interface {
 	Draw()
 	Close()
 	AddHandlerOnly(Key, Handler)
+	IsFocusable() bool
 }
 
 // Attributes text and hilight color
@@ -53,4 +54,6 @@ const (
 	TypeRadio
 	// TypeTable type is table component
 	TypeTable
+	// TypeHeading type is heading component
+	TypeHeading
 )

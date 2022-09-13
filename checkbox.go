@@ -18,6 +18,10 @@ type CheckBox struct {
 	handlers Handlers
 }
 
+func (c *CheckBox) IsFocusable() bool {
+	return true
+}
+
 type box struct {
 	name string
 	*Position
@@ -42,7 +46,7 @@ func NewCheckBox(gui *gocui.Gui, label string, x, y, labelWidth int) *CheckBox {
 		isChecked: false,
 		Position:  p,
 		Attributes: &Attributes{
-			textColor:   gocui.ColorYellow | gocui.AttrBold,
+			textColor:   gocui.ColorYellow,
 			textBgColor: gocui.ColorDefault,
 		},
 		box: &box{
@@ -151,6 +155,10 @@ func (c *CheckBox) Draw() {
 		v.Frame = false
 		v.FgColor = b.textColor
 		v.BgColor = b.textBgColor
+
+		if c.IsChecked() {
+			c.Check(c.Gui, v)
+		}
 
 		c.Gui.SetCurrentView(v.Name())
 

@@ -49,7 +49,7 @@ func NewForm(gui *gocui.Gui, name string, x, y, w, h int) *Form {
 }
 
 // AddInputField add input field to form
-func (f *Form) AddInputField(label string, labelWidth, fieldWidth int) *InputField {
+func (f *Form) AddInputField(label string, labelWidth, fieldWidth int, initialValue string) *InputField {
 	var y int
 
 	p := f.getLastViewPosition()
@@ -68,7 +68,31 @@ func (f *Form) AddInputField(label string, labelWidth, fieldWidth int) *InputFie
 		fieldWidth,
 	)
 
+	input.SetText(initialValue)
 	f.inputs = append(f.inputs, input)
+	f.components = append(f.components, input)
+
+	return input
+}
+
+// AddHeading add heading field to form
+func (f *Form) AddHeading(label string) *HeadingField {
+	var y int
+
+	p := f.getLastViewPosition()
+	if p != nil {
+		y = p.H
+	} else {
+		y = f.Y + 1
+	}
+
+	input := NewHeading(
+		f.Gui,
+		label,
+		f.X+1,
+		y,
+	)
+
 	f.components = append(f.components, input)
 
 	return input
@@ -110,7 +134,7 @@ func (f *Form) AddButton(label string, handler Handler) *Button {
 }
 
 // AddCheckBox add checkbox
-func (f *Form) AddCheckBox(label string, width int) *CheckBox {
+func (f *Form) AddCheckBox(label string, width int, checked bool) *CheckBox {
 	var y int
 
 	p := f.getLastViewPosition()
@@ -127,6 +151,8 @@ func (f *Form) AddCheckBox(label string, width int) *CheckBox {
 		y,
 		width,
 	)
+
+	checkbox.isChecked = checked
 
 	f.checkBoxs = append(f.checkBoxs, checkbox)
 	f.components = append(f.components, checkbox)
@@ -338,7 +364,11 @@ func (f *Form) Validate() bool {
 func (f *Form) NextItem(g *gocui.Gui, v *gocui.View) error {
 	f.components[f.activeItem].UnFocus()
 	f.activeItem = (f.activeItem + 1) % len(f.components)
-	f.components[f.activeItem].Focus()
+	if f.components[f.activeItem].IsFocusable() {
+		f.components[f.activeItem].Focus()
+	} else {
+		f.NextItem(g, v)
+	}
 	return nil
 }
 
@@ -352,7 +382,11 @@ func (f *Form) PreItem(g *gocui.Gui, v *gocui.View) error {
 		f.activeItem = (f.activeItem - 1) % len(f.components)
 	}
 
-	f.components[f.activeItem].Focus()
+	if f.components[f.activeItem].IsFocusable() {
+		f.components[f.activeItem].Focus()
+	} else {
+		f.PreItem(g, v)
+	}
 
 	return nil
 }
@@ -378,33 +412,37 @@ func (f *Form) Draw() {
 		cp.AddHandlerOnly(gocui.KeyTab, f.NextItem)
 		cp.AddHandlerOnly(gocui.KeyArrowDown, f.NextItem)
 		cp.AddHandlerOnly(gocui.KeyArrowUp, f.PreItem)
+		cp.AddHandlerOnly(gocui.KeyEsc, f.Close)
 		cp.Draw()
 	}
 
 	f.SetView(f.name, f.X, f.Y, f.W+1, f.H+1, 0)
 
-	if len(f.components) != 0 {
-		f.components[0].Focus()
+	for i := 0; i < len(f.components); i++ {
+		if f.components[i].IsFocusable() {
+			f.activeItem = i
+			f.components[i].Focus()
+			break
+		}
 	}
 }
 
 // Close close form
 func (f *Form) Close(g *gocui.Gui, v *gocui.View) error {
-	if err := f.Gui.DeleteView(f.name); err != nil {
-		if err != gocui.ErrUnknownView {
-			panic(err)
-		}
-	}
 
 	for _, c := range f.components {
 		c.Close()
 	}
+
+	f.Gui.DeleteView(f.name)
 
 	if len(f.closeFuncs) != 0 {
 		for _, f := range f.closeFuncs {
 			f()
 		}
 	}
+
+	f.Gui.Cursor = false
 
 	return nil
 }

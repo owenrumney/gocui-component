@@ -16,6 +16,10 @@ type Button struct {
 	*Attributes
 }
 
+func (b *Button) IsFocusable() bool {
+	return true
+}
+
 // NewButton new button
 func NewButton(gui *gocui.Gui, label string, x, y, width int) *Button {
 	if len(label) >= width {

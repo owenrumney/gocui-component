@@ -20,6 +20,10 @@ type InputField struct {
 	field *Field
 }
 
+func (i *InputField) IsFocusable() bool {
+	return true
+}
+
 // Label struct
 type Label struct {
 	text      string

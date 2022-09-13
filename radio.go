@@ -34,6 +34,10 @@ type Radio struct {
 	*Attributes
 }
 
+func (r *Radio) IsFocusable() bool {
+	return true
+}
+
 type option struct {
 	name      string
 	unCheck   string
