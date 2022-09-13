@@ -399,6 +399,7 @@ func (f *Form) Draw() {
 		}
 
 		v.Title = fmt.Sprintf(" %s ", strings.Title(f.name))
+		v.Subtitle = " Esc to cancel "
 	}
 
 	for _, cp := range f.components {
