@@ -1,6 +1,9 @@
 package component
 
 import (
+	"fmt"
+	"strings"
+
 	"github.com/awesome-gocui/gocui"
 )
 
@@ -361,7 +364,7 @@ func (f *Form) Draw() {
 			panic(err)
 		}
 
-		v.Title = f.name
+		v.Title = fmt.Sprintf(" %s ", strings.Title(f.name))
 	}
 
 	for _, cp := range f.components {
