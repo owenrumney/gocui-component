@@ -286,7 +286,7 @@ func (i *InputField) Draw() {
 
 		v.Frame = i.label.drawFrame
 
-		v.FgColor = i.label.textColor | gocui.AttrBold
+		v.FgColor = i.label.textColor
 		v.BgColor = i.label.textBgColor
 
 		fmt.Fprint(v, i.label.text)
