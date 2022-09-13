@@ -414,6 +414,7 @@ func (f *Form) Draw() {
 		cp.AddHandlerOnly(gocui.KeyArrowDown, f.NextItem)
 		cp.AddHandlerOnly(gocui.KeyArrowUp, f.PreItem)
 		cp.AddHandlerOnly(gocui.KeyEsc, f.Close)
+		cp.AddHandlerOnly('q', f.Close)
 		cp.Draw()
 	}
 
