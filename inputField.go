@@ -228,9 +228,9 @@ func (i *InputField) Edit(v *gocui.View, key gocui.Key, ch rune, mod gocui.Modif
 	case key == gocui.KeyBackspace || key == gocui.KeyBackspace2:
 		v.EditDelete(true)
 	case key == gocui.KeyArrowLeft:
-		v.MoveCursor(-1, 0, false)
+		v.MoveCursor(-1, 0)
 	case key == gocui.KeyArrowRight:
-		v.MoveCursor(+1, 0, false)
+		v.MoveCursor(+1, 0)
 	}
 
 	// get field text
