@@ -1,7 +1,7 @@
 package component
 
 import (
-	"github.com/jroimartin/gocui"
+	"github.com/awesome-gocui/gocui"
 )
 
 // Form form struct

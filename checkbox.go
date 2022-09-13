@@ -3,7 +3,7 @@ package component
 import (
 	"fmt"
 
-	"github.com/jroimartin/gocui"
+	"github.com/awesome-gocui/gocui"
 )
 
 // CheckBox struct

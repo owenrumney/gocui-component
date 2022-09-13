@@ -1,6 +1,6 @@
 package component
 
-import "github.com/jroimartin/gocui"
+import "github.com/awesome-gocui/gocui"
 
 // Key define kye type
 type Key interface{}

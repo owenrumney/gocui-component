@@ -1,5 +1,5 @@
 # gocui-component
-This is unofficial [gocui](https://github.com/jroimartin/gocui) component.  
+This is unofficial [gocui](https://github.com/awesome-gocui/gocui) component.  
 Form and others can be created easily.
 
 # Features

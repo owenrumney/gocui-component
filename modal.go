@@ -5,7 +5,7 @@ import (
 	"math"
 	"strings"
 
-	"github.com/jroimartin/gocui"
+	"github.com/awesome-gocui/gocui"
 )
 
 // Modal struct
