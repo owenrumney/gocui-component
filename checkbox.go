@@ -130,7 +130,7 @@ func (c *CheckBox) GetType() ComponentType {
 // Draw draw label and checkbox
 func (c *CheckBox) Draw() {
 	// draw label
-	if v, err := c.Gui.SetView(c.label, c.X, c.Y, c.W, c.H); err != nil {
+	if v, err := c.Gui.SetView(c.label, c.X, c.Y, c.W, c.H, 0); err != nil {
 		if err != gocui.ErrUnknownView {
 			panic(err)
 		}
@@ -143,7 +143,7 @@ func (c *CheckBox) Draw() {
 
 	// draw checkbox
 	b := c.box
-	if v, err := c.Gui.SetView(b.name, b.X, b.Y, b.W, b.H); err != nil {
+	if v, err := c.Gui.SetView(b.name, b.X, b.Y, b.W, b.H, 0); err != nil {
 		if err != gocui.ErrUnknownView {
 			panic(err)
 		}

@@ -94,7 +94,7 @@ func (b *Button) GetType() ComponentType {
 
 // Draw draw button
 func (b *Button) Draw() {
-	if v, err := b.Gui.SetView(b.label, b.X, b.Y, b.W, b.H); err != nil {
+	if v, err := b.Gui.SetView(b.label, b.X, b.Y, b.W, b.H, 0); err != nil {
 		if err != gocui.ErrUnknownView {
 			panic(err)
 		}

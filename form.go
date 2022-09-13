@@ -356,7 +356,7 @@ func (f *Form) PreItem(g *gocui.Gui, v *gocui.View) error {
 
 // Draw form
 func (f *Form) Draw() {
-	if v, err := f.Gui.SetView(f.name, f.X, f.Y, f.W+1, f.H+1); err != nil {
+	if v, err := f.Gui.SetView(f.name, f.X, f.Y, f.W+1, f.H+1, 0); err != nil {
 		if err != gocui.ErrUnknownView {
 			panic(err)
 		}
@@ -378,7 +378,7 @@ func (f *Form) Draw() {
 		cp.Draw()
 	}
 
-	f.SetView(f.name, f.X, f.Y, f.W+1, f.H+1)
+	f.SetView(f.name, f.X, f.Y, f.W+1, f.H+1, 0)
 
 	if len(f.components) != 0 {
 		f.components[0].Focus()

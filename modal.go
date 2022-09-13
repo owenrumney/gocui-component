@@ -117,7 +117,7 @@ func (m *Modal) GetPosition() *Position {
 // Draw draw modal
 func (m *Modal) Draw() {
 	// modal
-	if v, err := m.Gui.SetView(m.name, m.X, m.Y, m.W, m.H); err != nil {
+	if v, err := m.Gui.SetView(m.name, m.X, m.Y, m.W, m.H, 0); err != nil {
 		if err != gocui.ErrUnknownView {
 			panic(err)
 		}
@@ -130,7 +130,7 @@ func (m *Modal) Draw() {
 	// text area
 	area := m.textArea
 	if area.text != "" {
-		if v, err := area.Gui.SetView(area.name, area.X, area.Y, area.W, area.H); err != nil {
+		if v, err := area.Gui.SetView(area.name, area.X, area.Y, area.W, area.H, 0); err != nil {
 			if err != gocui.ErrUnknownView {
 				panic(err)
 			}

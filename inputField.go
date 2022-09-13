@@ -275,7 +275,7 @@ func (i *InputField) GetType() ComponentType {
 func (i *InputField) Draw() {
 	// draw label
 	x, y, w, h := i.addMargin(i.label)
-	if v, err := i.Gui.SetView(labelPrefix+i.label.text, x, y, w, h); err != nil {
+	if v, err := i.Gui.SetView(labelPrefix+i.label.text, x, y, w, h, 0); err != nil {
 		if err != gocui.ErrUnknownView {
 			panic(err)
 		}
@@ -290,7 +290,7 @@ func (i *InputField) Draw() {
 
 	// draw input
 	x, y, w, h = i.addMargin(i.field)
-	if v, err := i.Gui.SetView(i.label.text, x, y, w, h); err != nil {
+	if v, err := i.Gui.SetView(i.label.text, x, y, w, h, 0); err != nil {
 		if err != gocui.ErrUnknownView {
 			panic(err)
 		}

@@ -51,7 +51,7 @@ func (v *Validator) AddValidate(errMsg string, validate func(value string) bool)
 
 // DispValidateMsg display validate error message
 func (v *Validator) DispValidateMsg() {
-	if vi, err := v.SetView(v.name, v.X, v.Y, v.W, v.H); err != nil {
+	if vi, err := v.SetView(v.name, v.X, v.Y, v.W, v.H, 0); err != nil {
 		if err != gocui.ErrUnknownView {
 			panic(err)
 		}

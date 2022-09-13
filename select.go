@@ -176,7 +176,7 @@ func (s *Select) expandOpt(g *gocui.Gui, vi *gocui.View) error {
 		for _, opt := range s.options {
 			y++
 			h++
-			if v, err := g.SetView(opt, x, y, w, h); err != nil {
+			if v, err := g.SetView(opt, x, y, w, h, 0); err != nil {
 				if err != gocui.ErrUnknownView {
 					panic(err)
 				}

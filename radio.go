@@ -217,7 +217,7 @@ func (r *Radio) IsChecked() bool {
 
 // Draw draw radio
 func (r *Radio) Draw() {
-	if v, err := r.Gui.SetView(r.label, r.X, r.Y, r.W, r.H); err != nil {
+	if v, err := r.Gui.SetView(r.label, r.X, r.Y, r.W, r.H, 0); err != nil {
 		if err != gocui.ErrUnknownView {
 			panic(err)
 		}
@@ -229,7 +229,7 @@ func (r *Radio) Draw() {
 	}
 
 	for i, opt := range r.options {
-		if v, err := r.Gui.SetView(opt.name, opt.X, opt.Y, opt.W, opt.H); err != nil {
+		if v, err := r.Gui.SetView(opt.name, opt.X, opt.Y, opt.W, opt.H, 0); err != nil {
 			if err != gocui.ErrUnknownView {
 				panic(err)
 			}
