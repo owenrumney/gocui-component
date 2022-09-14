@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/awesome-gocui/gocui"
-	component "github.com/owenrumney/gocui-component"
+	component "github.com/owenrumney/gocui-form"
 )
 
 type SettingsWidget struct {
