@@ -1,4 +1,4 @@
-module github.com/owenrumney/gocui-component
+module github.com/owenrumney/gocui-form
 
 go 1.19
 
